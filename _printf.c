@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 	int i = 0;
 	int count = 0;
 	va_list ap;
+	char *str;
 
 	va_start(ap, format);
 	while (format[i] != '\0')
@@ -20,6 +21,17 @@ int _printf(const char *format, ...)
 			if (format[i] == 'c')
 			{
 				_putchar(va_arg(ap, int));
+				count++;
+			}
+			else if (format[i] == 's')
+			{
+				str = va_arg(ap, char*);
+				_printstring(str);
+				count += stringlength(str);
+			}
+			else if (format[i] == '%')
+			{
+				_putchar('%');
 				count++;
 			}
 		}
